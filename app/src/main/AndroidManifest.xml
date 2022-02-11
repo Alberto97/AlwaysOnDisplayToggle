@@ -16,7 +16,8 @@
         <service android:name=".AodTileService"
             android:icon="@drawable/ic_developer_mode_black_24dp"
             android:label="@string/toggle_name"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE"/>
