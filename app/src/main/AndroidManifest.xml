@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme" >
 
         <service android:name=".AodTileService"
-            android:icon="@drawable/ic_developer_mode_black_24dp"
+            android:icon="@drawable/ic_round_aod_24"
             android:label="@string/toggle_name"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:exported="true">
