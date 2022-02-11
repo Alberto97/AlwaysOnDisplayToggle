@@ -29,20 +29,22 @@ class AodTileService : TileService() {
         super.onClick()
 
         if (hasPermission()) {
-            val enabled = !isEnabled()
-            setEnabled(enabled)
-            setActive(enabled)
+            toggleAod()
         } else {
-            val ctx = ContextThemeWrapper(this, R.style.Theme_AppCompat_DayNight)
-            val msg1 = getString(R.string.grant_msg1)
-            val msg2 = getString(R.string.grant_msg2, this.packageName, Manifest.permission.WRITE_SECURE_SETTINGS)
-            val dialog = AlertDialog.Builder(ctx)
-                .setMessage("${msg1}\n${msg2}")
-                .setNeutralButton(android.R.string.ok, null)
-                .create()
-
-            showDialog(dialog)
+            showPermissionDialog()
         }
+    }
+
+    private fun showPermissionDialog() {
+        val ctx = ContextThemeWrapper(this, R.style.Theme_AppCompat_DayNight)
+        val msg1 = getString(R.string.grant_msg1)
+        val msg2 = getString(R.string.grant_msg2, this.packageName, Manifest.permission.WRITE_SECURE_SETTINGS)
+        val dialog = AlertDialog.Builder(ctx)
+            .setMessage("${msg1}\n${msg2}")
+            .setNeutralButton(android.R.string.ok, null)
+            .create()
+
+        showDialog(dialog)
     }
 
     private fun hasPermission(): Boolean {
@@ -51,6 +53,12 @@ class AodTileService : TileService() {
         Log.d("package", "${Manifest.permission.WRITE_SECURE_SETTINGS} granted: $granted")
 
         return granted
+    }
+
+    private fun toggleAod() {
+        val enabled = !isEnabled()
+        setEnabled(enabled)
+        setActive(enabled)
     }
 
     private fun setActive(active: Boolean) {
