@@ -17,6 +17,9 @@ android {
     }
 
     buildTypes {
+        all {
+            archivesBaseName = "aod-toggle-${android.defaultConfig.versionName}"
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
