@@ -1,0 +1,7 @@
+This app adds a tile to the quick settings panel that turns Always on Display on or off.
+The app needs to write to the system settings and the following command has to be run from your computer via adb in order for the app to work properly:
+
+adb shell pm grant org.alberto97.aodtoggle android.permission.WRITE_SECURE_SETTINGS
+
+Please note that this app has only been tested on Google Pixel.
+Different manufacturers may have implemented AoD their own way and therefore the app might not work.
