@@ -2,6 +2,7 @@ package org.alberto97.aodtoggle
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
@@ -16,6 +17,10 @@ class AodTileService : TileService() {
         val config = AmbientDisplayConfiguration()
         if (!config.isAvailable()) {
             val tile = qsTile
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                tile.subtitle = getString(R.string.unsupported_device)
+
             tile.state = Tile.STATE_UNAVAILABLE
             tile.updateTile()
             return

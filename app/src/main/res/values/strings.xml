@@ -3,4 +3,5 @@
     <string name="toggle_name">Always on display</string>
     <string name="grant_msg1">Please run the following command from your pc:</string>
     <string name="grant_msg2">adb shell pm grant %1$s %2$s</string>
+    <string name="unsupported_device">Unsupported device</string>
 </resources>
