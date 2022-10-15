@@ -19,7 +19,7 @@ You can grant it with adb:
 ```bash
 adb shell pm grant org.alberto97.aodtoggle android.permission.WRITE_SECURE_SETTINGS
 ```
-or in case of multiple users (userId can be found via `adb shell pm list users`):
+or in case of multiple users (`<userId>` is listed as first number in output of `adb shell pm list users`):
 ```bash
 adb shell pm grant --user <userId> org.alberto97.aodtoggle android.permission.WRITE_SECURE_SETTINGS
 ```
