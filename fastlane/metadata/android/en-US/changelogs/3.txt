@@ -1,0 +1,2 @@
+* Added support for Android 13
+* Remove no more used dependency
