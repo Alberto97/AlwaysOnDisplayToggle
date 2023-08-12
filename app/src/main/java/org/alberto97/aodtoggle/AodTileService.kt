@@ -1,13 +1,12 @@
 package org.alberto97.aodtoggle
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
-import android.view.ContextThemeWrapper
-import androidx.appcompat.app.AlertDialog
 
 class AodTileService : TileService() {
 
@@ -41,10 +40,9 @@ class AodTileService : TileService() {
     }
 
     private fun showPermissionDialog() {
-        val ctx = ContextThemeWrapper(this, R.style.Theme_AppCompat_DayNight)
         val msg1 = getString(R.string.grant_msg1)
         val msg2 = getString(R.string.grant_msg2, this.packageName, Manifest.permission.WRITE_SECURE_SETTINGS)
-        val dialog = AlertDialog.Builder(ctx)
+        val dialog = AlertDialog.Builder(this)
             .setMessage("${msg1}\n${msg2}")
             .setNeutralButton(android.R.string.ok, null)
             .create()
