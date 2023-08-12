@@ -72,9 +72,7 @@ class AodTileService : TileService() {
 
     private fun isEnabled(): Boolean {
         val enabled = try {
-            return android.provider.Settings.Secure.getInt(this.contentResolver,
-                Settings.DOZE_ALWAYS_ON
-            ) == 1
+            android.provider.Settings.Secure.getInt(contentResolver, Settings.DOZE_ALWAYS_ON) == 1
         } catch (e: Exception) {
             false
         }
