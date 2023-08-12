@@ -1,5 +1,6 @@
 package org.alberto97.aodtoggle
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.text.TextUtils
 import android.util.Log
@@ -36,6 +37,7 @@ class AmbientDisplayConfiguration {
         return available
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun getAndroidIdentifier(name: String, defType: String): Int {
         return Resources.getSystem().getIdentifier(name, defType, "android")
     }
