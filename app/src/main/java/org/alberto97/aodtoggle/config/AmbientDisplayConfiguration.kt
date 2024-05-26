@@ -1,4 +1,4 @@
-package org.alberto97.aodtoggle
+package org.alberto97.aodtoggle.config
 
 import android.annotation.SuppressLint
 import android.content.res.Resources

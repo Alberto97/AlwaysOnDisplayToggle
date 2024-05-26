@@ -7,6 +7,13 @@ import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
+import org.alberto97.aodtoggle.TileServiceExtensions.collapseQSPanel
+import org.alberto97.aodtoggle.config.AmbientDisplayConfiguration
+import org.alberto97.aodtoggle.config.Settings
+import org.alberto97.aodtoggle.permissions.GrantWriteSecureSettingsUseCase
+import org.alberto97.aodtoggle.permissions.ShizukuStatus
+import org.alberto97.aodtoggle.permissions.ShizukuUtils
+import rikka.shizuku.Shizuku
 
 class AodTileService : TileService() {
 
@@ -33,6 +40,39 @@ class AodTileService : TileService() {
         super.onClick()
 
         if (hasPermission()) {
+            toggleAod()
+        } else {
+            handleMissingPermission()
+        }
+    }
+
+    private fun handleMissingPermission() {
+        when (ShizukuUtils.hasPermission()) {
+            ShizukuStatus.PERM_GRANTED -> handleShizukuPermissionGranted()
+            ShizukuStatus.PERM_NOT_GRANTED -> requestShizukuPermission()
+            // TODO: Inform the user to install shizuku or use ADB
+            ShizukuStatus.SERVICE_STOPPED -> showPermissionDialog()
+        }
+    }
+
+    private fun requestShizukuPermission() {
+        collapseQSPanel()
+        Shizuku.requestPermission(0)
+        Shizuku.addRequestPermissionResultListener { _, grantResult ->
+            val hasPermission = grantResult == PackageManager.PERMISSION_GRANTED
+            if (hasPermission) {
+                handleShizukuPermissionGranted()
+            } else {
+                // TODO: Inform the user to grant shizuku perm
+                showPermissionDialog()
+            }
+        }
+    }
+
+    private fun handleShizukuPermissionGranted() {
+        val grantWriteSecureSettingsUseCase = GrantWriteSecureSettingsUseCase()
+        val granted = grantWriteSecureSettingsUseCase.execute(baseContext)
+        if (granted) {
             toggleAod()
         } else {
             showPermissionDialog()

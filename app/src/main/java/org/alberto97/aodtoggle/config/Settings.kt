@@ -1,4 +1,4 @@
-package org.alberto97.aodtoggle
+package org.alberto97.aodtoggle.config
 
 // Keep in sync with
 // https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/provider/Settings.java
