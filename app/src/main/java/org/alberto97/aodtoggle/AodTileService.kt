@@ -21,19 +21,12 @@ class AodTileService : TileService() {
         super.onStartListening()
 
         val config = AmbientDisplayConfiguration()
-        if (!config.isAvailable()) {
-            val tile = qsTile
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                tile.subtitle = getString(R.string.unsupported_device)
-
-            tile.state = Tile.STATE_UNAVAILABLE
-            tile.updateTile()
-            return
+        if (config.isAvailable()) {
+            val enabled = isAodEnabled()
+            setTileActive(enabled)
+        } else {
+            setTileUnavailable()
         }
-
-        val enabled = isEnabled()
-        setActive(enabled)
     }
 
     override fun onClick() {
@@ -99,18 +92,28 @@ class AodTileService : TileService() {
     }
 
     private fun toggleAod() {
-        val enabled = !isEnabled()
-        setEnabled(enabled)
-        setActive(enabled)
+        val enabled = !isAodEnabled()
+        setAodEnabled(enabled)
+        setTileActive(enabled)
     }
 
-    private fun setActive(active: Boolean) {
+    private fun setTileUnavailable() {
+        val tile = qsTile
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            tile.subtitle = getString(R.string.unsupported_device)
+
+        tile.state = Tile.STATE_UNAVAILABLE
+        tile.updateTile()
+    }
+
+    private fun setTileActive(active: Boolean) {
         val tile = qsTile
         tile.state = if (active) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
         tile.updateTile()
     }
 
-    private fun isEnabled(): Boolean {
+    private fun isAodEnabled(): Boolean {
         val enabled = try {
             android.provider.Settings.Secure.getInt(contentResolver, Settings.DOZE_ALWAYS_ON) == 1
         } catch (e: Exception) {
@@ -120,10 +123,9 @@ class AodTileService : TileService() {
         return enabled
     }
 
-    private fun setEnabled(state: Boolean): Boolean {
+    private fun setAodEnabled(state: Boolean): Boolean {
         val intState = if (state) 1 else 0
-        android.provider.Settings.Secure.putInt(this.contentResolver,
-            Settings.DOZE_ALWAYS_ON, intState)
-        return isEnabled()
+        android.provider.Settings.Secure.putInt(contentResolver, Settings.DOZE_ALWAYS_ON, intState)
+        return isAodEnabled()
     }
 }
