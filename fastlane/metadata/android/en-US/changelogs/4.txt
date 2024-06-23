@@ -1,0 +1,2 @@
+* Added support for Android 14
+* The WRITE_SECURE_SETTINGS permission now can be granted via Shizuku

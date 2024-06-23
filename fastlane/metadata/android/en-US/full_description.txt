@@ -1,5 +1,5 @@
 This app adds a tile to the quick settings panel that turns Always on Display on or off.
-The app needs to write to the system settings and the following command has to be run from your computer via adb in order for the app to work properly:
+The app needs to write to the system settings. Therefore the related permission has to be granted via Shizuku or from your computer with adb in order for the app to work properly:
 
 adb shell pm grant org.alberto97.aodtoggle android.permission.WRITE_SECURE_SETTINGS
 
