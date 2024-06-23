@@ -43,8 +43,7 @@ class AodTileService : TileService() {
         when (ShizukuUtils.hasPermission()) {
             ShizukuStatus.PERM_GRANTED -> handleShizukuPermissionGranted()
             ShizukuStatus.PERM_NOT_GRANTED -> requestShizukuPermission()
-            // TODO: Inform the user to install shizuku or use ADB
-            ShizukuStatus.SERVICE_STOPPED -> showPermissionDialog()
+            ShizukuStatus.SERVICE_STOPPED -> showWriteSecureSettingsPermissionDialog()
         }
     }
 
@@ -56,8 +55,7 @@ class AodTileService : TileService() {
             if (hasPermission) {
                 handleShizukuPermissionGranted()
             } else {
-                // TODO: Inform the user to grant shizuku perm
-                showPermissionDialog()
+                showMissingShizukuPermissionDialog()
             }
         }
     }
@@ -68,15 +66,29 @@ class AodTileService : TileService() {
         if (granted) {
             toggleAod()
         } else {
-            showPermissionDialog()
+            showWriteSecureSettingsPermissionDialog()
         }
     }
 
-    private fun showPermissionDialog() {
-        val msg1 = getString(R.string.grant_msg1)
-        val msg2 = getString(R.string.grant_msg2, this.packageName, Manifest.permission.WRITE_SECURE_SETTINGS)
+    private fun showWriteSecureSettingsPermissionDialog() {
+        val msg = getString(
+            R.string.grant_write_secure_settings,
+            this.packageName,
+            Manifest.permission.WRITE_SECURE_SETTINGS
+        )
         val dialog = AlertDialog.Builder(this)
-            .setMessage("${msg1}\n${msg2}")
+            .setMessage(msg)
+            .setNeutralButton(android.R.string.ok, null)
+            .create()
+
+        showDialog(dialog)
+    }
+
+    private fun showMissingShizukuPermissionDialog() {
+        val appName = getString(R.string.app_name)
+        val msg = getString(R.string.grant_shizuku_permission, appName)
+        val dialog = AlertDialog.Builder(this)
+            .setMessage(msg)
             .setNeutralButton(android.R.string.ok, null)
             .create()
 

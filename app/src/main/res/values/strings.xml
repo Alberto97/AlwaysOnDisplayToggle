@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Always on display toggle</string>
     <string name="toggle_name">Always on display</string>
-    <string name="grant_msg1">Please run the following command from your pc:</string>
-    <string name="grant_msg2">adb shell pm grant %1$s %2$s</string>
+    <string name="grant_write_secure_settings">Please install Shizuku or run the following command from your pc:\nadb shell pm grant %1$s %2$s</string>
+    <string name="grant_shizuku_permission">Please open Shizuku and authorize the app \"%1$s\"</string>
     <string name="unsupported_device">Unsupported device</string>
 </resources>
