@@ -1,0 +1,6 @@
+這個應用程式能在快速設定面板建立一個啟用 / 停用 Always On Display (微光螢幕) 方塊。
+這項功能需要寫入系統設定，請透過 Shizuku 或您電腦中的 ADB 命令取得權限，使其能夠正常運作：
+adb shell pm grant org.alberto97.aodtoggle android.permission.WRITE_SECURE_SETTINGS
+
+請注意，本應用程式僅有使用 Google Pixel 進行測試。
+不同的裝置製造商可能會以其他方式設計 Always On Display，使本應用程式無法運作。
