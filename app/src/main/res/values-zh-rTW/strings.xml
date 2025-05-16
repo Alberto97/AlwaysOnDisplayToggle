@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">切換微光螢幕</string>
+    <string name="toggle_name">微光螢幕</string>
+    <string name="grant_write_secure_settings">請安裝 Shizuku 或連接您的電腦並執行下列指令：
+\nadb shell pm grant %1$s %2$s</string>
+    <string name="grant_shizuku_permission">請開啟 Shizuku 並授權應用程式「%1$s」</string>
+    <string name="unsupported_device">不支援的裝置</string>
+</resources>
