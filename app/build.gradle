@@ -38,5 +38,5 @@ dependencies {
     implementation "dev.rikka.shizuku:api:$shizuku_version"
     implementation "dev.rikka.shizuku:provider:$shizuku_version"
 
-    compileOnly "dev.rikka.hidden:stub:4.3.3"
+    compileOnly "dev.rikka.hidden:stub:4.4.0"
 }
