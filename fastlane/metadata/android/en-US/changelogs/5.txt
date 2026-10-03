@@ -1,0 +1,3 @@
+* Added support for Android 16 and 17.
+* Added Traditional Chinese translation.
+* Categorized the Quick Settings tile under Display.
