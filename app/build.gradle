@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'org.alberto97.aodtoggle'
-    compileSdk 35
+    compileSdk 37
 
     defaultConfig {
         applicationId "org.alberto97.aodtoggle"
         minSdkVersion 26
-        targetSdkVersion 35
+        targetSdkVersion 37
         versionCode 4
         versionName "1.1.0"
 
